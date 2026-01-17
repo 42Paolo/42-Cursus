@@ -5,14 +5,13 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/01/17 15:47:54 by pabrogi           #+#    #+#              #
-#    Updated: 2026/01/17 15:48:50 by pabrogi          ###   ########.fr        #
+#    Created: 2026/01/17 16:26:28 by pabrogi           #+#    #+#              #
+#    Updated: 2026/01/17 16:26:39 by pabrogi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-# Directory
 SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = includes
@@ -55,63 +54,41 @@ SRCS = $(MAIN_SRC) \
 	   $(PARSER_SRCS) \
 	   $(SOLVER_SRCS) \
 	   $(UTILS_SRCS)
-OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	@echo "🔗 Linking $(NAME)..."
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
-	@echo "✅ $(NAME) created successfully!"
 
 $(LIBFT):
 	@if [ -d "$(LIBFT_DIR)" ]; then \
-		echo "📚 Compiling libft..."; \
 		$(MAKE) -C $(LIBFT_DIR); \
 	fi
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	@echo "🔨 Compiling $<..."
-	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)/stack
-	@mkdir -p $(OBJ_DIR)/operations
-	@mkdir -p $(OBJ_DIR)/parser
-	@mkdir -p $(OBJ_DIR)/solver
-	@mkdir -p $(OBJ_DIR)/utils
+	mkdir -p $(OBJ_DIR)/stack
+	mkdir -p $(OBJ_DIR)/operations
+	mkdir -p $(OBJ_DIR)/parser
+	mkdir -p $(OBJ_DIR)/solver
+	mkdir -p $(OBJ_DIR)/utils
 
 clean:
-	@echo "🧹 Cleaning object files..."
-	@rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_DIR)
 	@if [ -d "$(LIBFT_DIR)" ]; then \
 		$(MAKE) -C $(LIBFT_DIR) clean; \
 	fi
-	@echo "✅ Clean completed!"
 
 fclean: clean
-	@echo "🧹 Cleaning executable..."
-	@rm -f $(NAME)
+	rm -f $(NAME)
 	@if [ -d "$(LIBFT_DIR)" ]; then \
 		$(MAKE) -C $(LIBFT_DIR) fclean; \
 	fi
-	@echo "✅ Fclean completed!"
 
 re: fclean all
 
-test: $(NAME)
-	@echo "🧪 Running tests..."
-	@./$(NAME) 2 1 3
-
-debug: CFLAGS += -g -fsanitize=address
-debug: re
-
-show:
-	@echo "📁 Source files:"
-	@find $(SRC_DIR) -name "*.c" 2>/dev/null | sort || echo "No source files found"
-	@echo "\n📄 Header files:"
-	@find $(INC_DIR) -name "*.h" 2>/dev/null | sort || echo "No header files found"
-
-.PHONY: all clean fclean re test debug show
+.PHONY: all clean fclean re
