@@ -1,4 +1,4 @@
-def ft_plant_age():
+def ft_plant_age() -> None::
 	try:
 		age_in_days = int(input("Enter plant age in days: "))
 		if age_in_days < 0:

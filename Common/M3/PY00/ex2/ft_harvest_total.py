@@ -1,4 +1,4 @@
-def ft_harvest_total():
+def ft_harvest_total() -> None::
 	try:
 		d1 = int(input("Day 1 harvest: "))
 		d2 = int(input("Day 2 harvest: "))

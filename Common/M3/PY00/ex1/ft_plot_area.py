@@ -1,4 +1,4 @@
-def ft_plot_area():
+def ft_plot_area() -> None:
     try:
         width = int(input("Enter width: "))
         lenght = int(input("Enter lenght: "))
