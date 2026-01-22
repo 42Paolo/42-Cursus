@@ -1,4 +1,4 @@
-def ft_harvest_total() -> None::
+def ft_harvest_total() -> None:
 	try:
 		d1 = int(input("Day 1 harvest: "))
 		d2 = int(input("Day 2 harvest: "))
@@ -8,4 +8,4 @@ def ft_harvest_total() -> None::
 			return
 		print(f"Total harvest: {d1 + d2 + d3}")
 	except ValueError:
-		 print("Invalid input! Please enter an integer number.")
+		print("Invalid input! Please enter an integer number.")

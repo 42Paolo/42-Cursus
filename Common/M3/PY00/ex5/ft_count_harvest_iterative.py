@@ -4,8 +4,10 @@ def ft_count_harvest_iterative() -> None:
 		if days_left < 0:
 			print("Days left can't be negative")
 			return
-		for i in range(1, days_left + 1):
+		i = 1
+		while i <= days_left:
 			print(f"Day {i}")
+			i += 1
 		print("Harvest time!")
 	except ValueError:
 		print("Invalid input! Please enter an integer number.")
