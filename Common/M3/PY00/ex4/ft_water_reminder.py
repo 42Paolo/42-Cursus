@@ -9,4 +9,4 @@ def ft_water_reminder():
 		else:
 			print("Plants are fine")
 	except ValueError:
-		print("Invalid input! Please enter an integer number.")
+		print("Invalid input! Please enter an integer number.")cd 
