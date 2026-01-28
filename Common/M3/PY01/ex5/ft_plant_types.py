@@ -7,6 +7,7 @@ class Plant:
     def get_info(self):
         return f"{self.name}: {self.height_cm}cm, {self.age_days} days"
 
+
 class Flower(Plant):
     def __init__(self, name, height_cm, age_days, color):
         super().__init__(name, height_cm, age_days)
@@ -17,6 +18,7 @@ class Flower(Plant):
 
     def get_info(self):
         return f"{self.name} (Flower): {self.height_cm}cm, {self.age_days} days, {self.color} color"
+
 
 class Tree(Plant):
     def __init__(self, name, height_cm, age_days, trunk_diameter):
@@ -29,6 +31,7 @@ class Tree(Plant):
 
     def get_info(self):
         return f"{self.name} (Tree): {self.height_cm}cm, {self.age_days} days, {self.trunk_diameter}cm diameter"
+
 
 class Vegetable(Plant):
     def __init__(self, name, height_cm, age_days, harvest_season, nutritional_value):
@@ -46,13 +49,13 @@ class Vegetable(Plant):
 if __name__ == "__main__":
     print("=== Garden Plant Types ===")
 
-    f1 = Flower("Margherita", 25, 30, "bianco")
-	f2 = Flower("Girasole", 180, 90, "giallo")
-	t1 = Tree("Olivo", 400, 3650, 70)
-	t2 = Tree("Quercia", 500, 5000, 80)
-	v1 = Vegetable("Pomodoro", 80, 90, "estate", "vitamina C")
-	v2 = Vegetable("Carota", 40, 60, "primavera", "vitamina A")
-	
+    f1 = Flower("Rose", 25, 30, "red")
+    f2 = Flower("Tulip", 30, 40, "yellow")
+    t1 = Tree("Oak", 500, 1825, 50)
+    t2 = Tree("Pine", 600, 2000, 60)
+    v1 = Vegetable("Tomato", 80, 90, "summer", "vitamin C")
+    v2 = Vegetable("Carrot", 40, 60, "spring", "vitamin A")
+
     plants = [f1, f2, t1, t2, v1, v2]
 
     for plant in plants:
