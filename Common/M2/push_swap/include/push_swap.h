@@ -6,7 +6,7 @@
 /*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:32:16 by pabrogi           #+#    #+#             */
-/*   Updated: 2026/02/02 16:55:52 by pabrogi          ###   ########.fr       */
+/*   Updated: 2026/02/02 16:58:42 by pabrogi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	rrr(t_stack **stack_a, t_stack **stack_b, int print);
 t_stack	*get_bottom(t_stack *stack);
 t_stack	*get_before_bottom(t_stack *stack);
 t_stack	*stack_new(int value);
-void	stack_add_bottom(t_stack **stack, t_stack *new);
+void	stack_add_bottom(t_stack **stack, t_stack *new_);
 int		stack_size(t_stack *stack);
 int		is_sorted(t_stack *stack);
 
