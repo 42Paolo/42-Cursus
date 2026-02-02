@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,43 +12,57 @@
 
 #include "../../include/push_swap.h"
 
-static void	swap(t_stack **stack)
+void	ft_putstr(char *str)
 {
-	t_stack	*first;
-	t_stack	*second;
-	int		tmp_value;
-	int		tmp_index;
+	int	i;
 
-	if (!*stack || !(*stack)->next)
-		return ;
-	first = *stack;
-	second = first->next;
-	tmp_value = first->value;
-	tmp_index = first->index;
-	first->value = second->value;
-	first->index = second->index;
-	second->value = tmp_value;
-	second->index = tmp_index;
+	i = 0;
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
 }
 
-void	sa(t_stack **stack_a, int print)
+long	ft_atol(const char *str)
 {
-	swap(stack_a);
-	if (print)
-		ft_putstr("sa\n");
+	long	result;
+	int		sign;
+	int		i;
+
+	result = 0;
+	sign = 1;
+	i = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
+	return (result * sign);
 }
 
-void	sb(t_stack **stack_b, int print)
+int	ft_abs(int n)
 {
-	swap(stack_b);
-	if (print)
-		ft_putstr("sb\n");
+	if (n < 0)
+		return (-n);
+	return (n);
 }
 
-void	ss(t_stack **stack_a, t_stack **stack_b, int print)
+int	is_sorted(t_stack *stack)
 {
-	swap(stack_a);
-	swap(stack_b);
-	if (print)
-		ft_putstr("ss\n");
+	while (stack && stack->next)
+	{
+		if (stack->value > stack->next->value)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
 }

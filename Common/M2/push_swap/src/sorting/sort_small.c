@@ -1,0 +1,69 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_small.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/02 14:32:16 by pabrogi           #+#    #+#             */
+/*   Updated: 2026/02/02 14:32:17 by pabrogi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../include/push_swap.h"
+
+static int	find_highest_index(t_stack *stack)
+{
+	int	highest;
+
+	highest = stack->index;
+	while (stack)
+	{
+		if (stack->index > highest)
+			highest = stack->index;
+		stack = stack->next;
+	}
+	return (highest);
+}
+
+void	sort_three(t_stack **stack_a)
+{
+	int	highest;
+
+	if (is_sorted(*stack_a))
+		return ;
+	highest = find_highest_index(*stack_a);
+	if ((*stack_a)->index == highest)
+		ra(stack_a, 1);
+	else if ((*stack_a)->next->index == highest)
+		rra(stack_a, 1);
+	if ((*stack_a)->index > (*stack_a)->next->index)
+		sa(stack_a, 1);
+}
+
+void	sort_small(t_stack **stack_a, t_stack **stack_b)
+{
+	int	size;
+	int	min_pos;
+
+	size = stack_size(*stack_a);
+	while (size > 3)
+	{
+		min_pos = get_min_index_pos(stack_a);
+		if (min_pos <= size / 2)
+		{
+			while (min_pos-- > 0)
+				ra(stack_a, 1);
+		}
+		else
+		{
+			while (min_pos++ < size)
+				rra(stack_a, 1);
+		}
+		pb(stack_a, stack_b, 1);
+		size--;
+	}
+	sort_three(stack_a);
+	while (*stack_b)
+		pa(stack_a, stack_b, 1);
+}

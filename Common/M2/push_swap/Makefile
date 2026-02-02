@@ -5,89 +5,59 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/01/17 16:26:28 by pabrogi           #+#    #+#              #
-#    Updated: 2026/01/17 16:26:39 by pabrogi          ###   ########.fr        #
+#    Created: 2026/02/02 14:32:16 by pabrogi           #+#    #+#              #
+#    Updated: 2026/02/02 14:32:17 by pabrogi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -I./include
 NAME = push_swap
 
 SRC_DIR = src
 OBJ_DIR = obj
-INC_DIR = includes
-LIBFT_DIR = libft
+INC_DIR = include
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-INCLUDES = -I$(INC_DIR) -I$(LIBFT_DIR)/includes
+OPERATIONS = $(SRC_DIR)/operations/push.c \
+             $(SRC_DIR)/operations/swap.c \
+             $(SRC_DIR)/operations/rotate.c \
+             $(SRC_DIR)/operations/reverse_rotate.c
 
-LIBFT = $(LIBFT_DIR)/libft.a
-LDFLAGS = -L$(LIBFT_DIR) -lft
+SORTING = $(SRC_DIR)/sorting/sort.c \
+          $(SRC_DIR)/sorting/sort_small.c \
+          $(SRC_DIR)/sorting/cost.c \
+          $(SRC_DIR)/sorting/position.c
 
-MAIN_SRC = $(SRC_DIR)/main.c
+PARSING = $(SRC_DIR)/parsing/parse.c \
+          $(SRC_DIR)/parsing/ft_split.c
 
-STACK_SRCS = $(SRC_DIR)/stack/stack_init.c \
-			 $(SRC_DIR)/stack/stack_operations.c \
-			 $(SRC_DIR)/stack/stack_utils.c
+UTILS = $(SRC_DIR)/utils/utils.c \
+        $(SRC_DIR)/utils/stack_utils.c \
+        $(SRC_DIR)/utils/error.c \
+        $(SRC_DIR)/utils/index.c
 
-OPS_SRCS = $(SRC_DIR)/operations/push.c \
-		   $(SRC_DIR)/operations/swap.c \
-		   $(SRC_DIR)/operations/rotate.c \
-		   $(SRC_DIR)/operations/reverse_rotate.c
-
-PARSER_SRCS = $(SRC_DIR)/parser/parse_input.c \
-			  $(SRC_DIR)/parser/validate.c \
-			  $(SRC_DIR)/parser/convert.c
-
-SOLVER_SRCS = $(SRC_DIR)/solver/small_sort.c \
-			  $(SRC_DIR)/solver/large_sort.c \
-			  $(SRC_DIR)/solver/chunk_sort.c \
-			  $(SRC_DIR)/solver/optimize_moves.c
-
-UTILS_SRCS = $(SRC_DIR)/utils/errors.c \
-			 $(SRC_DIR)/utils/memory.c \
-			 $(SRC_DIR)/utils/print.c
-
-SRCS = $(MAIN_SRC) \
-	   $(STACK_SRCS) \
-	   $(OPS_SRCS) \
-	   $(PARSER_SRCS) \
-	   $(SOLVER_SRCS) \
-	   $(UTILS_SRCS)
+SRCS = $(SRC_DIR)/main.c \
+       $(OPERATIONS) \
+       $(SORTING) \
+       $(PARSING) \
+       $(UTILS)
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-$(LIBFT):
-	@if [ -d "$(LIBFT_DIR)" ]; then \
-		$(MAKE) -C $(LIBFT_DIR); \
-	fi
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)/stack
-	mkdir -p $(OBJ_DIR)/operations
-	mkdir -p $(OBJ_DIR)/parser
-	mkdir -p $(OBJ_DIR)/solver
-	mkdir -p $(OBJ_DIR)/utils
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJ_DIR)
-	@if [ -d "$(LIBFT_DIR)" ]; then \
-		$(MAKE) -C $(LIBFT_DIR) clean; \
-	fi
 
 fclean: clean
 	rm -f $(NAME)
-	@if [ -d "$(LIBFT_DIR)" ]; then \
-		$(MAKE) -C $(LIBFT_DIR) fclean; \
-	fi
 
 re: fclean all
 

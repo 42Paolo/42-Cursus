@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,43 +12,38 @@
 
 #include "../../include/push_swap.h"
 
-static void	swap(t_stack **stack)
+void	error_exit(void)
 {
-	t_stack	*first;
-	t_stack	*second;
-	int		tmp_value;
-	int		tmp_index;
+	ft_putstr("Error\n");
+	exit(1);
+}
 
-	if (!*stack || !(*stack)->next)
+void	free_stack(t_stack **stack)
+{
+	t_stack	*tmp;
+
+	if (!stack || !(*stack))
 		return ;
-	first = *stack;
-	second = first->next;
-	tmp_value = first->value;
-	tmp_index = first->index;
-	first->value = second->value;
-	first->index = second->index;
-	second->value = tmp_value;
-	second->index = tmp_index;
+	while (*stack)
+	{
+		tmp = (*stack)->next;
+		free(*stack);
+		*stack = tmp;
+	}
+	*stack = NULL;
 }
 
-void	sa(t_stack **stack_a, int print)
+void	free_split(char **split)
 {
-	swap(stack_a);
-	if (print)
-		ft_putstr("sa\n");
-}
+	int	i;
 
-void	sb(t_stack **stack_b, int print)
-{
-	swap(stack_b);
-	if (print)
-		ft_putstr("sb\n");
-}
-
-void	ss(t_stack **stack_a, t_stack **stack_b, int print)
-{
-	swap(stack_a);
-	swap(stack_b);
-	if (print)
-		ft_putstr("ss\n");
+	if (!split)
+		return ;
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }
