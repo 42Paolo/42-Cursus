@@ -6,7 +6,7 @@
 /*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:32:16 by pabrogi           #+#    #+#             */
-/*   Updated: 2026/02/02 14:32:17 by pabrogi          ###   ########.fr       */
+/*   Updated: 2026/02/02 14:51:42 by pabrogi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,6 @@ static char	*get_word(char const *s, char c)
 	}
 	word[i] = '\0';
 	return (word);
-}
-
-static char const	*skip_delimiters(char const *s, char c)
-{
-	while (*s && *s == c)
-		s++;
-	return (s);
-}
-
-static char const	*skip_word(char const *s, char c)
-{
-	while (*s && *s != c)
-		s++;
-	return (s);
 }
 
 static char	**fill_result(char const *s, char c, char **result)

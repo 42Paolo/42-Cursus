@@ -6,7 +6,7 @@
 /*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:32:16 by pabrogi           #+#    #+#             */
-/*   Updated: 2026/02/02 14:32:17 by pabrogi          ###   ########.fr       */
+/*   Updated: 2026/02/02 14:56:18 by pabrogi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,39 +46,6 @@ int	has_duplicates(t_stack *stack)
 		stack = stack->next;
 	}
 	return (0);
-}
-
-static void	add_to_stack(t_stack **stack, int value)
-{
-	t_stack	*new;
-
-	new = stack_new(value);
-	if (!new)
-	{
-		free_stack(stack);
-		error_exit();
-	}
-	stack_add_bottom(stack, new);
-}
-
-static void	process_number(char *str, t_stack **stack, char **numbers)
-{
-	long	num;
-
-	if (!is_number(str))
-	{
-		free_split(numbers);
-		free_stack(stack);
-		error_exit();
-	}
-	num = ft_atol(str);
-	if (num > INT_MAX || num < INT_MIN)
-	{
-		free_split(numbers);
-		free_stack(stack);
-		error_exit();
-	}
-	add_to_stack(stack, (int)num);
 }
 
 static void	parse_string(char *str, t_stack **stack)
