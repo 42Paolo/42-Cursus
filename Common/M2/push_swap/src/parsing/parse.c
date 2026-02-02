@@ -6,46 +6,43 @@
 /*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:32:16 by pabrogi           #+#    #+#             */
-/*   Updated: 2026/02/02 14:56:18 by pabrogi          ###   ########.fr       */
+/*   Updated: 2026/02/02 16:54:44 by pabrogi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-int	is_number(char *str)
+static void	add_to_stack(t_stack **stack, int value)
 {
-	int	i;
+	t_stack	*new;
 
-	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	if (!str[i])
-		return (0);
-	while (str[i])
+	new = stack_new(value);
+	if (!new)
 	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-		i++;
+		free_stack(stack);
+		error_exit();
 	}
-	return (1);
+	stack_add_bottom(stack, new);
 }
 
-int	has_duplicates(t_stack *stack)
+static void	process_number(char *str, t_stack **stack, char **numbers)
 {
-	t_stack	*tmp;
+	long	num;
 
-	while (stack)
+	if (!is_number(str))
 	{
-		tmp = stack->next;
-		while (tmp)
-		{
-			if (stack->value == tmp->value)
-				return (1);
-			tmp = tmp->next;
-		}
-		stack = stack->next;
+		free_split(numbers);
+		free_stack(stack);
+		error_exit();
 	}
-	return (0);
+	num = ft_atol(str);
+	if (num > INT_MAX || num < INT_MIN)
+	{
+		free_split(numbers);
+		free_stack(stack);
+		error_exit();
+	}
+	add_to_stack(stack, (int)num);
 }
 
 static void	parse_string(char *str, t_stack **stack)

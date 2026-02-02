@@ -6,7 +6,7 @@
 /*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:32:16 by pabrogi           #+#    #+#             */
-/*   Updated: 2026/02/02 14:32:17 by pabrogi          ###   ########.fr       */
+/*   Updated: 2026/02/02 16:40:02 by pabrogi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 void	ft_putstr(char *str)
 {
-	int	i;
+	int	len;
 
-	i = 0;
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
+	len = 0;
+	while (str[len])
+		len++;
+	if (len > 0)
+		write(1, str, len);
 }
 
 long	ft_atol(const char *str)

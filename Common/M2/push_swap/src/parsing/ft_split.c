@@ -6,53 +6,24 @@
 /*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:32:16 by pabrogi           #+#    #+#             */
-/*   Updated: 2026/02/02 14:51:42 by pabrogi          ###   ########.fr       */
+/*   Updated: 2026/02/02 16:54:30 by pabrogi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-static int	count_words(char const *s, char c)
+static char const	*skip_delimiters(char const *s, char c)
 {
-	int	count;
-	int	in_word;
-
-	count = 0;
-	in_word = 0;
-	while (*s)
-	{
-		if (*s != c && !in_word)
-		{
-			in_word = 1;
-			count++;
-		}
-		else if (*s == c)
-			in_word = 0;
+	while (*s && *s == c)
 		s++;
-	}
-	return (count);
+	return (s);
 }
 
-static char	*get_word(char const *s, char c)
+static char const	*skip_word(char const *s, char c)
 {
-	int		len;
-	int		i;
-	char	*word;
-
-	len = 0;
-	while (s[len] && s[len] != c)
-		len++;
-	word = (char *)malloc(sizeof(char) * (len + 1));
-	if (!word)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		word[i] = s[i];
-		i++;
-	}
-	word[i] = '\0';
-	return (word);
+	while (*s && *s != c)
+		s++;
+	return (s);
 }
 
 static char	**fill_result(char const *s, char c, char **result)
