@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/05 14:49:16 by pabrogi           #+#    #+#             */
-/*   Updated: 2026/02/03 16:18:13 by pabrogi          ###   ########.fr       */
+/*   Created: 2026/01/12 10:18:29 by pabrogi           #+#    #+#             */
+/*   Updated: 2026/01/24 16:42:11 by pabrogi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,39 +33,39 @@ static t_stack	*get_next_min(t_stack *stack)
 
 void	assign_index(t_stack *stack_a, int stack_size)
 {
-	t_stack	*current;
-	int		index;
+	t_stack	*ptr;
+	int		idx;
 
-	index = 1;
-	while (index <= stack_size)
+	idx = 1;
+	while (idx <= stack_size)
 	{
-		current = get_next_min(stack_a);
-		if (current)
-			current->index = index;
-		index++;
+		ptr = get_next_min(stack_a);
+		if (ptr)
+			ptr->index = idx;
+		idx++;
 	}
 }
 
 int	get_min_index_pos(t_stack **stack)
 {
-	t_stack	*current;
-	int		min_index;
+	t_stack	*tmp;
+	int		min_idx;
 	int		min_pos;
 	int		pos;
 
-	current = *stack;
-	min_index = current->index;
+	tmp = *stack;
+	min_idx = tmp->index;
 	min_pos = 0;
 	pos = 0;
-	while (current)
+	while (tmp)
 	{
-		if (current->index < min_index)
+		if (tmp->index < min_idx)
 		{
-			min_index = current->index;
+			min_idx = tmp->index;
 			min_pos = pos;
 		}
 		pos++;
-		current = current->next;
+		tmp = tmp->next;
 	}
 	return (min_pos);
 }

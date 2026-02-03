@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/29 11:38:10 by pabrogi           #+#    #+#             */
-/*   Updated: 2026/02/03 16:12:32 by pabrogi          ###   ########.fr       */
+/*   Created: 2026/01/11 11:35:48 by pabrogi           #+#    #+#             */
+/*   Updated: 2026/01/18 21:07:33 by pabrogi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ static void	add_to_stack(t_stack **stack, int value)
 	stack_add_bottom(stack, new);
 }
 
-static void	process_number(char *str, t_stack **stack, char **numbers)
+static void	process_number(char *str, t_stack **stack, char **nums)
 {
 	long	num;
 
 	if (!is_number(str))
 	{
-		free_split(numbers);
+		free_split(nums);
 		free_stack(stack);
 		error_exit();
 	}
 	num = ft_atol(str);
 	if (num > INT_MAX || num < INT_MIN)
 	{
-		free_split(numbers);
+		free_split(nums);
 		free_stack(stack);
 		error_exit();
 	}
@@ -47,19 +47,19 @@ static void	process_number(char *str, t_stack **stack, char **numbers)
 
 static void	parse_string(char *str, t_stack **stack)
 {
-	char	**numbers;
+	char	**nums;
 	int		i;
 
-	numbers = ft_split(str, ' ');
-	if (!numbers)
+	nums = ft_split(str, ' ');
+	if (!nums)
 		error_exit();
 	i = 0;
-	while (numbers[i])
+	while (nums[i])
 	{
-		process_number(numbers[i], stack, numbers);
+		process_number(nums[i], stack, nums);
 		i++;
 	}
-	free_split(numbers);
+	free_split(nums);
 }
 
 static void	parse_multiple_args(int argc, char **argv, t_stack **stack_a)

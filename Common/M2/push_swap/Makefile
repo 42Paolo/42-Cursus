@@ -1,53 +1,48 @@
-CC      = cc
-CFLAGS  = -Wall -Wextra -Werror -I./include
-NAME    = push_swap
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/01/10 13:22:45 by pabrogi           #+#    #+#              #
+#    Updated: 2026/01/31 22:20:33 by pabrogi          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRC_DIR = src
-OBJ_DIR = obj
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+NAME = push_swap
 
-OPERATIONS = \
-	$(SRC_DIR)/operations/push.c \
-	$(SRC_DIR)/operations/swap.c \
-	$(SRC_DIR)/operations/rotate.c \
-	$(SRC_DIR)/operations/reverse_rotate.c
+SRCS = src/main.c \
+       src/operations/push.c \
+       src/operations/swap.c \
+       src/operations/rotate.c \
+       src/operations/reverse_rotate.c \
+       src/sorting/sort.c \
+       src/sorting/sort_for_small.c \
+       src/sorting/cost_args.c \
+       src/sorting/searchposition.c \
+       src/parsing/parse_input.c \
+       src/parsing/ft_split.c \
+       src/parsing/ft_utils.c \
+       src/utils/utils_lib.c \
+       src/utils/stack_utils.c \
+       src/utils/error_in.c \
+       src/utils/index_argument.c
 
-SORTING = \
-	$(SRC_DIR)/sorting/sort.c \
-	$(SRC_DIR)/sorting/sort_small.c \
-	$(SRC_DIR)/sorting/cost.c \
-	$(SRC_DIR)/sorting/position.c
-
-PARSING = \
-	$(SRC_DIR)/parsing/parse.c \
-	$(SRC_DIR)/parsing/ft_split.c \
-	$(SRC_DIR)/parsing/ft_utils.c
-
-UTILS = \
-	$(SRC_DIR)/utils/utils.c \
-	$(SRC_DIR)/utils/stack_utils.c \
-	$(SRC_DIR)/utils/error.c \
-	$(SRC_DIR)/utils/index.c
-
-SRCS = \
-	$(SRC_DIR)/main.c \
-	$(OPERATIONS) \
-	$(SORTING) \
-	$(PARSING) \
-	$(UTILS)
-
-OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) -I./include -c $< -o $@
 
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)

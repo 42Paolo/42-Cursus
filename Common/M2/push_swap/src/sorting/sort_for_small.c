@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/30 10:52:17 by pabrogi           #+#    #+#             */
-/*   Updated: 2026/02/03 16:10:47 by pabrogi          ###   ########.fr       */
+/*   Created: 2026/01/13 09:22:14 by pabrogi           #+#    #+#             */
+/*   Updated: 2026/01/25 14:18:39 by pabrogi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,25 @@ void	sort_three(t_stack **stack_a)
 
 void	sort_small(t_stack **stack_a, t_stack **stack_b)
 {
-	int	size;
-	int	min_pos;
+	int	sz;
+	int	pos;
 
-	size = stack_size(*stack_a);
-	while (size > 3)
+	sz = stack_size(*stack_a);
+	while (sz > 3)
 	{
-		min_pos = get_min_index_pos(stack_a);
-		if (min_pos <= size / 2)
+		pos = get_min_index_pos(stack_a);
+		if (pos <= sz / 2)
 		{
-			while (min_pos-- > 0)
+			while (pos-- > 0)
 				ra(stack_a, 1);
 		}
 		else
 		{
-			while (min_pos++ < size)
+			while (pos++ < sz)
 				rra(stack_a, 1);
 		}
 		pb(stack_a, stack_b, 1);
-		size--;
+		sz--;
 	}
 	sort_three(stack_a);
 	while (*stack_b)

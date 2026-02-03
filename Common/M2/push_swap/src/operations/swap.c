@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/25 10:20:15 by pabrogi           #+#    #+#             */
-/*   Updated: 2026/02/03 16:14:14 by pabrogi          ###   ########.fr       */
+/*   Created: 2026/01/11 09:45:22 by pabrogi           #+#    #+#             */
+/*   Updated: 2026/01/11 10:12:38 by pabrogi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ static void	swap(t_stack **stack)
 {
 	t_stack	*first;
 	t_stack	*second;
-	int		tmp_value;
-	int		tmp_index;
+	int		tmp_val;
+	int		tmp_idx;
 
 	if (!*stack || !(*stack)->next)
 		return ;
 	first = *stack;
 	second = first->next;
-	tmp_value = first->value;
-	tmp_index = first->index;
+	tmp_val = first->value;
+	tmp_idx = first->index;
 	first->value = second->value;
 	first->index = second->index;
-	second->value = tmp_value;
-	second->index = tmp_index;
+	second->value = tmp_val;
+	second->index = tmp_idx;
 }
 
 void	sa(t_stack **stack_a, int print)

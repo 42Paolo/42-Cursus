@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 12:39:01 by pabrogi           #+#    #+#             */
-/*   Updated: 2026/02/03 16:12:01 by pabrogi          ###   ########.fr       */
+/*   Created: 2026/01/23 13:11:45 by pabrogi           #+#    #+#             */
+/*   Updated: 2026/01/30 23:28:17 by pabrogi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,71 +14,70 @@
 
 void	get_cost(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack	*current_a;
-	t_stack	*current_b;
-	int		size_a;
-	int		size_b;
+	t_stack	*tmp_a;
+	t_stack	*curr_b;
+	int		sz_a;
+	int		sz_b;
 
-	current_a = *stack_a;
-	current_b = *stack_b;
-	size_a = stack_size(current_a);
-	size_b = stack_size(current_b);
-	while (current_b)
+	tmp_a = *stack_a;
+	curr_b = *stack_b;
+	sz_a = stack_size(tmp_a);
+	sz_b = stack_size(curr_b);
+	while (curr_b)
 	{
-		current_b->cost_b = current_b->pos;
-		if (current_b->pos > size_b / 2)
-			current_b->cost_b = (size_b - current_b->pos) * -1;
-		current_b->cost_a = current_b->target_pos;
-		if (current_b->target_pos > size_a / 2)
-			current_b->cost_a = (size_a - current_b->target_pos) * -1;
-		current_b = current_b->next;
+		curr_b->cost_b = curr_b->pos;
+		if (curr_b->pos > sz_b / 2)
+			curr_b->cost_b = (sz_b - curr_b->pos) * -1;
+		curr_b->cost_a = curr_b->target_pos;
+		if (curr_b->target_pos > sz_a / 2)
+			curr_b->cost_a = (sz_a - curr_b->target_pos) * -1;
+		curr_b = curr_b->next;
 	}
 }
 
-static void	do_move(t_stack **stack_a, t_stack **stack_b,
-		int cost_a, int cost_b)
+static void	do_move(t_stack **stack_a, t_stack **stack_b, int ca, int cb)
 {
-	while (cost_a > 0 && cost_b > 0)
+	while (ca > 0 && cb > 0)
 	{
 		rr(stack_a, stack_b, 1);
-		cost_a--;
-		cost_b--;
+		ca--;
+		cb--;
 	}
-	while (cost_a < 0 && cost_b < 0)
+	while (ca < 0 && cb < 0)
 	{
 		rrr(stack_a, stack_b, 1);
-		cost_a++;
-		cost_b++;
+		ca++;
+		cb++;
 	}
-	while (cost_a > 0 && cost_a--)
+	while (ca > 0 && ca--)
 		ra(stack_a, 1);
-	while (cost_a < 0 && cost_a++)
+	while (ca < 0 && ca++)
 		rra(stack_a, 1);
-	while (cost_b > 0 && cost_b--)
+	while (cb > 0 && cb--)
 		rb(stack_b, 1);
-	while (cost_b < 0 && cost_b++)
+	while (cb < 0 && cb++)
 		rrb(stack_b, 1);
 	pa(stack_a, stack_b, 1);
 }
 
 void	do_cheapest_move(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack	*current;
+	t_stack	*tmp;
 	int		cheapest;
-	int		cost_a;
-	int		cost_b;
+	int		ca;
+	int		cb;
 
-	current = *stack_b;
+	tmp = *stack_b;
 	cheapest = INT_MAX;
-	while (current)
+	while (tmp)
 	{
-		if (ft_abs(current->cost_a) + ft_abs(current->cost_b) < cheapest)
+		if (ft_abs(tmp->cost_a) + ft_abs(tmp->cost_b) < cheapest)
 		{
-			cheapest = ft_abs(current->cost_a) + ft_abs(current->cost_b);
-			cost_a = current->cost_a;
-			cost_b = current->cost_b;
+			cheapest = ft_abs(tmp->cost_a) + ft_abs(tmp->cost_b);
+			ca = tmp->cost_a;
+			cb = tmp->cost_b;
 		}
-		current = current->next;
+		tmp = tmp->next;
 	}
-	do_move(stack_a, stack_b, cost_a, cost_b);
+	do_move(stack_a, stack_b, ca, cb);
 }

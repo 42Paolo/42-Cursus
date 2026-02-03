@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 20:52:55 by pabrogi           #+#    #+#             */
-/*   Updated: 2026/02/03 16:11:29 by pabrogi          ###   ########.fr       */
+/*   Created: 2026/01/22 16:38:22 by pabrogi           #+#    #+#             */
+/*   Updated: 2026/02/03 17:07:55 by pabrogi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,63 +14,61 @@
 
 void	get_position(t_stack **stack)
 {
-	t_stack	*current;
+	t_stack	*tmp;
 	int		pos;
 
-	current = *stack;
+	tmp = *stack;
 	pos = 0;
-	while (current)
+	while (tmp)
 	{
-		current->pos = pos;
+		tmp->pos = pos;
 		pos++;
-		current = current->next;
+		tmp = tmp->next;
 	}
 }
 
-static int	get_target(t_stack *stack_a, int index_b,
-		int target_index, int target_pos)
+static int	get_target(t_stack *stack_a, int idx_b, int tgt_idx, int tgt_pos)
 {
-	t_stack	*current;
+	t_stack	*tmp;
 
-	current = stack_a;
-	while (current)
+	tmp = stack_a;
+	while (tmp)
 	{
-		if (current->index > index_b && current->index < target_index)
+		if (tmp->index > idx_b && tmp->index < tgt_idx)
 		{
-			target_index = current->index;
-			target_pos = current->pos;
+			tgt_idx = tmp->index;
+			tgt_pos = tmp->pos;
 		}
-		current = current->next;
+		tmp = tmp->next;
 	}
-	if (target_index != INT_MAX)
-		return (target_pos);
-	current = stack_a;
-	while (current)
+	if (tgt_idx != INT_MAX)
+		return (tgt_pos);
+	tmp = stack_a;
+	while (tmp)
 	{
-		if (current->index < target_index)
+		if (tmp->index < tgt_idx)
 		{
-			target_index = current->index;
-			target_pos = current->pos;
+			tgt_idx = tmp->index;
+			tgt_pos = tmp->pos;
 		}
-		current = current->next;
+		tmp = tmp->next;
 	}
-	return (target_pos);
+	return (tgt_pos);
 }
 
 void	get_target_position(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack	*current_b;
-	int		target_pos;
+	t_stack	*curr_b;
+	int		tgt_pos;
 
-	current_b = *stack_b;
+	curr_b = *stack_b;
 	get_position(stack_a);
 	get_position(stack_b);
-	target_pos = 0;
-	while (current_b)
+	tgt_pos = 0;
+	while (curr_b)
 	{
-		target_pos = get_target(*stack_a, current_b->index,
-				INT_MAX, target_pos);
-		current_b->target_pos = target_pos;
-		current_b = current_b->next;
+		tgt_pos = get_target(*stack_a, curr_b->index, INT_MAX, tgt_pos);
+		curr_b->target_pos = tgt_pos;
+		curr_b = curr_b->next;
 	}
 }
