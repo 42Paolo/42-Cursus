@@ -6,7 +6,7 @@
 /*   By: pabrogi <pabrogi@student.42firenze.it>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:32:16 by pabrogi           #+#    #+#             */
-/*   Updated: 2026/02/02 17:32:45 by pabrogi          ###   ########.fr       */
+/*   Updated: 2026/02/03 13:01:14 by pabrogi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	get_cost(t_stack **stack_a, t_stack **stack_b)
 		current_b = current_b->next;
 	}
 }
-
 
 static void	do_move(t_stack **stack_a, t_stack **stack_b,
 		int cost_a, int cost_b)
