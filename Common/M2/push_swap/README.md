@@ -24,6 +24,8 @@ Depending on the number of elements in the input, the program selects the sortin
   4. **Shift the stack** – after B is empty, rotate A so that the smallest number is on top, completing the sort.
 
 This method ensures that the algorithm handles both small and large lists efficiently, minimizing operations while following the project rules.
+AI got used during this project just to short the functions at 25 lines, multiples functions where up to 38 lines and couldn't find easy and clear way to short them 
+I decided to get some help from ChatGPT
 
 ---
 
