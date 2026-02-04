@@ -4,7 +4,7 @@ if __name__ == "__main__":
     print("=== Command Quest ===")
     
     program_name = sys.argv[0]
-    arguments = sys.argv[1:]
+    arguments = [int(x) for x in sys.argv[1:]]
     num_args = len(arguments)
 
     if num_args == 0:
