@@ -13,6 +13,10 @@ class WaterError(GardenError):
     pass
 
 
+class GardenManager:
+    def __init__(self):
+        self.plants: Dict[str, Dict[str, int]] = {}
+    
     def add_plant(self, name: str, water_level: int = 5, sunlight_hours: int = 8) -> None:
         if not name or name.strip() == "":
             raise ValueError("Plant name cannot be empty!")

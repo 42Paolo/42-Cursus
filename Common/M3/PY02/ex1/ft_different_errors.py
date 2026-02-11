@@ -45,7 +45,6 @@ def test_multiple_errors() -> None:
             operation()
         except (ValueError, ZeroDivisionError, FileNotFoundError):
             print("Caught an error, but program continues!")
-            break
 
 
 def test_error_types() -> None:
