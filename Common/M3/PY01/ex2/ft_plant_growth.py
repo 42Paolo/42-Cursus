@@ -1,29 +1,50 @@
 class Plant:
-    def __init__(self, name, height_cm, age_days):
-        self.name = name
-        self.height_cm = height_cm
-        self.age_days = age_days
+	def __init__(self, name, height_cm, age_d):
+		self.name = name
+		self.height_cm = height_cm
+		self.age_d = age_d
+		self.height_start = height_cm
+	
+	def age(self):
+		self.age_d += 1
 
-    def grow(self):
-        self.height_cm += 1
+	def grow(self):
+		self.height_cm += 1
+		self.age()
 
-    def age(self):
-        self.age_days += 1
-        self.grow()
+	def get_info(self):
+		print(f"{self.name}: {self.height_cm}cm {self.age_d} days old")
+	
+	def life(self):
+		if 	0 <= self.age_d <= 30:
+			print(f"Pianta {self.name}: Giovane")
+		elif 31 <= self.age_d <= 200:
+			print(f"Pianta {self.name}: Adulta")
+		elif 201 <= self.age_d <= 365:
+			print(f"Pianta {self.name}: Vecchia")
+		elif self.age_d > 365:
+			print(f"Pianta {self.name}: Morta")
 
-    def get_info(self):
-        print(f"{self.name}: {self.height_cm}cm, {self.age_days} days old")
+def grow_plant(p: Plant):
+	print(f"=== Day 1 ===")
+	p.grow()
+	p.get_info()
+	for i in range(2,7):
+		p.grow()
+	print(f"=== Day 7 ===")
+	p.get_info()
+	print(f"Growth this week: +{p.height_cm - p.height_start}")
 
+def main():
+	plants = [
+		Plant("Rose", 44, 5),
+		Plant("Tulipano", 10, 10),
+		Plant("Eocalipto", 20, 15)
+	]
+	for p in plants:
+		grow_plant(p)
+		p.life()
+		print()
 
 if __name__ == "__main__":
-    day = 1
-    p1 = Plant("Rose", 25, 30)
-    print(f"=== Day {day} ===")
-    p1.get_info()
-    initial_height = p1.height_cm
-    for i in range(1, 7):
-        day = day + 1
-        p1.age()
-    print(f"=== Day {day} ===")
-    p1.get_info()
-    print(f"Growth this week: +{p1.height_cm - initial_height}cm")
+	main()
