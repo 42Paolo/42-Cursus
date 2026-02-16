@@ -74,10 +74,14 @@ def main():
 	p5 = Aquactiche("Ninfea", 30, 10, 50, "Fresh")
 
 	plants = [p1, p2, p3, p4, p5]
+	i = 0
 
 	for p in plants:
+		i += 1
 		p.print_info()
 		print()
+	
+	print(f"Total plants created: {i}")
 
 if __name__ == "__main__":
 	main()
