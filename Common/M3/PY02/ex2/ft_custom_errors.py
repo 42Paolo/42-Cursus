@@ -1,11 +1,14 @@
 class GardenError(Exception):
-	pass
+    pass
+
 
 class PlantError(GardenError):
-	pass
+    pass
+
 
 class WaterError(GardenError):
-	pass
+    pass
+
 
 def raise_custom_errors() -> None:
     water_tank: int = -2
@@ -16,8 +19,8 @@ def raise_custom_errors() -> None:
     try:
         if plant_status == "wilting":
             raise PlantError(
-                            "Caught PlantError: " +
-                            "The tomato plant is wilting!\n"
+                "Caught PlantError: " +
+                "The tomato plant is wilting!\n"
             )
     except PlantError as pe:
         print(f"{pe}")

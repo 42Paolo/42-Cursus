@@ -1,10 +1,12 @@
 import sys
 
+
 def ft_len(obj):
     count = 0
     for _ in obj:
         count += 1
     return count
+
 
 def main():
     print("=== Player Score Analytics ===")
@@ -12,7 +14,8 @@ def main():
     argc = ft_len(sys.argv)
 
     if argc == 1:
-        print("No scores provided. Usage: python3 ft_score_analytics.py <score1> <score2> ...")
+        print("No scores provided. Usage: python3 ft_score_analytics.py "
+              "<score1> <score2> ...")
         return
 
     tot = 0
@@ -57,6 +60,7 @@ def main():
     print(f"High score: {max_score}")
     print(f"Low score: {min_score}")
     print(f"Score range: {score_range}")
+
 
 if __name__ == "__main__":
     main()

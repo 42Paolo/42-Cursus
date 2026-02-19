@@ -12,6 +12,7 @@ def ft_append(lst, element):
     new_list += [element]
     return new_list
 
+
 class Plant:
 
     category = "regular"
@@ -34,7 +35,14 @@ class FloweringPlant(Plant):
 
     category = "flowering"
 
-    def __init__(self, name, color, age_d, height_cm, bloom_stage, bloom_duration_days):
+    def __init__(
+            self,
+            name,
+            color,
+            age_d,
+            height_cm,
+            bloom_stage,
+            bloom_duration_days):
         super().__init__(name, color, age_d, height_cm)
         self.bloom_stage = bloom_stage
         self.bloom_duration_days = bloom_duration_days
@@ -45,7 +53,8 @@ class FloweringPlant(Plant):
         else:
             blooming = "not blooming"
 
-        return "- " + self.name + ": " + str(self.height_cm) + "cm, " + self.color + " flowers (" + blooming + ")"
+        return ("- " + self.name + ": " + str(self.height_cm) + "cm, "
+                + self.color + " flowers (" + blooming + ")")
 
 
 class PrizeFlower(FloweringPlant):
@@ -180,6 +189,7 @@ class GardenManager:
             print(garden.owner.name + ": " + str(garden.get_score()))
 
         print("Total gardens managed: " + str(ft_len(self.gardens)))
+
 
 def main():
 

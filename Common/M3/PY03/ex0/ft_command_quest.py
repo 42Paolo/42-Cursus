@@ -1,22 +1,21 @@
 import sys
 
-def ft_len(obj):
-	count = 0
-	for _ in obj:
-		count += 1
-	return count
 
-def main():
-	print("=== Command Quest ===")
-	argc = ft_len(sys.argv)
-	if argc == 1:
-		print("No arguments provided!")
-	print(f"Program name: {sys.argv[0]}")		
-	if argc != 1:
-		print(f"Arguments received: {argc-1}")
-		for i in range(1, argc):
-			print(f"Argument {i}: {sys.argv[i]}")
-	print(f"Total arguments: {argc}")
+def main() -> None:
+    args = sys.argv
+    print("=== Command Quest ===")
 
-if __name__ == "__main__":
-	main()
+    if len(args) == 1:
+        print("No arguments provided!")
+        print(f"Program name: {args[0]}")
+        print(f"Total arguments: {len(args)}")
+        return
+
+    print(f"Program name: {args[0]}")
+    print(f"Arguments received: {len(args) - 1}")
+    for i in range(1, len(args)):
+        print(f"Argument {i}: {args[i]}")
+    print(f"Total arguments: {len(args)}")
+
+
+main()
