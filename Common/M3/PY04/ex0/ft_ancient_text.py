@@ -18,5 +18,6 @@ def main():
 			OSError) as e:
 		print("Connection not established, reason:", e)
 		print("Data recovery not worked. Storage unit disconnected.\n")
+
 if __name__ == "__main__":
 	main()
