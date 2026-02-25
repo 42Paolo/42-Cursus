@@ -1,5 +1,6 @@
 from ast import Return
 from re import split
+from select import kevent
 import sys
 
 def split_inventory(args):
@@ -32,6 +33,28 @@ def perc_inventory(inventory, tot_items):
 		print(f"{key}: {inventory[key]} units ({perc}%)")
 		i = i + 1
 
+def search_max(inventory):
+	keys = list(inventory.keys())
+	i = 0
+	max = inventory[0]
+	while i < len(keys):
+		key = keys[i]
+		if inventory[key] > max:
+			max = key
+		i = i + 1 
+	return max
+
+def search_min(inventory):
+	keys = list(inventory.keys())
+	i = 0
+	min = inventory[0]
+	while i < len(keys):
+		key = keys[i]
+		if inventory[key] < min:
+			min = key 
+		i = i + 1	
+	return min
+
 def main():
 	argc = len(sys.argv)
 	if argc == 1:
@@ -40,13 +63,16 @@ def main():
 	args = sys.argv[1:]
 	inventory = split_inventory(args)
 	total_items = count_inventory_items(inventory)
-
+	max = search_max(inventory)
+	min = search_min(inventory)
 	print("=== Inventory System Analysis ===")
 	print("Total items in inventory" )
 	print("Unique item types: ", len(inventory))
-	print("=== Current Inventory ===")
+	print("\n=== Current Inventory ===")
 	perc_inventory(inventory, total_items)
-	
+	print("\n=== Inventory Statistics ===")
+	print(f"Most abundant: {max} ({inventory[max]} units)")
+	print(f"Most abundant: {min} ({inventory[min]} units)")
 	
 
 	#print(args)
