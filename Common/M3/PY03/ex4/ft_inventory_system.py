@@ -55,6 +55,24 @@ def search_min(inventory):
 		i = i + 1	
 	return min
 
+def categories_item(inventory):
+    mod_inv = dict()
+    scar_inv = dict()
+    for key in inventory:
+        if inventory[key] < 5:
+            scar_inv[key] = inventory[key]
+        else:
+            mod_inv[key] = inventory[key]
+    return scar_inv, mod_inv
+
+def search_restock(inventory):
+	rest_inv = dict()
+	for key in inventory:
+		if inventory[key] <= 1:
+			rest_inv[key] = inventory[key]
+	return rest_inv
+
+
 def main():
 	argc = len(sys.argv)
 	if argc == 1:
@@ -65,6 +83,7 @@ def main():
 	total_items = count_inventory_items(inventory)
 	max = search_max(inventory)
 	min = search_min(inventory)
+	rest_inv = search_restock(inventory)
 	print("=== Inventory System Analysis ===")
 	print("Total items in inventory" )
 	print("Unique item types: ", len(inventory))
@@ -73,6 +92,15 @@ def main():
 	print("\n=== Inventory Statistics ===")
 	print(f"Most abundant: {max} ({inventory[max]} units)")
 	print(f"Most abundant: {min} ({inventory[min]} units)")
+	print("=== Item Categories ===")
+	scars, mods = categories_item(inventory)
+	print(f"Moderate: {mods}")
+	print(f"Scarce: {scars}")
+	print("\n=== Management Suggestions ===")
+	print("Restock needed: ", end="")
+	
+
+
 	
 
 	#print(args)
