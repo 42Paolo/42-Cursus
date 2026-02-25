@@ -8,12 +8,20 @@ def split_inventory(args):
 	people = args[1:-1].split(", ")
 
 	for person in people:
-		name, age = person.split(":")
-		inventory[name] = int(age)
-		#inventory = {
-    	#"Paolo": 42
-		#}
+		name, qty = person.split(":")
+		inventory[name] = int(qty)
+
 	return inventory
+
+def count_inventory_items(inventory):
+    total = 0
+    keys = list(inventory.keys())
+    i = 0
+    while i < len(keys):
+        key = keys[i]
+        total = total + inventory[key]
+        i = i + 1
+    return total
 
 def main():
 	argc = len(sys.argv)
@@ -21,9 +29,14 @@ def main():
 		return 0
 
 	args = sys.argv[1:]
-	inventory = dict()
 	inventory = split_inventory(args)
+	total_items = count_inventory_items(inventory)
 
+	print("=== Inventory System Analysis ===")
+	print("Total items in inventory" )
+	print("Unique item types: ", len(inventory))
+	
+	
 
 	#print(args)
 	
