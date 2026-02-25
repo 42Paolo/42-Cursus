@@ -10,7 +10,9 @@ def split_inventory(args):
 	for person in people:
 		name, age = person.split(":")
 		inventory[name] = int(age)
-	
+		#inventory = {
+    	#"Paolo": 42
+		#}
 	return inventory
 
 def main():
