@@ -17,7 +17,6 @@ def game_event_generator(count):
         }
         i = i + 1
 
-
 def fibonacci_generator():
     a = 0
     b = 1
@@ -94,6 +93,5 @@ def main():
         prime_nums.append(next(prime_gen))
         p = p + 1
     print("Prime numbers (first 5):", ", ".join(str(x) for x in prime_nums))
-
 
 main()

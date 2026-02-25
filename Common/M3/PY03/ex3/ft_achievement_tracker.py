@@ -33,9 +33,9 @@ def main():
     alice_bob_common = alice.intersection(bob)
     alice_unique = alice.difference(bob)
     bob_unique = bob.difference(alice)
+	
     print("Alice vs Bob common:", alice_bob_common)
     print("Alice unique:", alice_unique)
     print("Bob unique:", bob_unique)
-
 
 main()

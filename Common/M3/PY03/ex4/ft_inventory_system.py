@@ -1,12 +1,11 @@
 import sys
 
 
-def split_inventory(arg_str: str) -> dict:
+def split_inventory(args: list) -> dict:
     inventory = {}
-    entries = arg_str.split(",")
-    for part in entries:
+    for part in args:
         part = part.strip()
-        if part == "" or ":" not in part:
+        if ":" not in part:
             print(f"Skipping invalid item: {part}")
             continue
         name, qty_str = part.split(":", 1)
@@ -32,26 +31,24 @@ def count_inventory_items(inventory: dict) -> int:
 
 
 def perc_inventory(inventory: dict, total_items: int) -> None:
-    for key in inventory:
-        qty = inventory[key]
+    sorted_items = sorted(inventory.items(), key=lambda x: x[1], reverse=True)
+    for key, qty in sorted_items:
         percent = (qty / total_items) * 100.0 if total_items > 0 else 0.0
         unit = "unit" if qty == 1 else "units"
         print(f"{key}: {qty} {unit} ({percent:.1f}%)")
 
 
 def find_max_item(inventory: dict) -> str:
-    keys = list(inventory.keys())
-    max_key = keys[0]
-    for key in keys[1:]:
+    max_key = list(inventory.keys())[0]
+    for key in inventory:
         if inventory[key] > inventory[max_key]:
             max_key = key
     return max_key
 
 
 def find_min_item(inventory: dict) -> str:
-    keys = list(inventory.keys())
-    min_key = keys[0]
-    for key in keys[1:]:
+    min_key = list(inventory.keys())[0]
+    for key in inventory:
         if inventory[key] < inventory[min_key]:
             min_key = key
     return min_key
@@ -92,14 +89,11 @@ def print_items(inventory: dict) -> None:
 
 
 def main() -> None:
-    if len(sys.argv) != 2:
-        print(
-            "Usage: python3 ft_inventory_system.py "
-            "\"item1:qty1, item2:qty2, ...\""
-        )
+    if len(sys.argv) < 2:
+        print("Usage: python3 ft_inventory_system.py item1:qty1 item2:qty2 ...")
         return
 
-    inventory = split_inventory(sys.argv[1])
+    inventory = split_inventory(sys.argv[1:])
     if len(inventory) == 0:
         print("No valid items in inventory.")
         return
@@ -125,10 +119,8 @@ def main() -> None:
     print()
     print("=== Item Categories ===")
     scarce, moderate = categories_item(inventory)
-    print("Moderate:")
-    print_items(moderate)
-    print("Scarce:")
-    print_items(scarce)
+    print(f"Moderate: {moderate}")
+    print(f"Scarce: {scarce}")
 
     print()
     print("=== Management Suggestions ===")
@@ -143,6 +135,10 @@ def main() -> None:
     print("Dictionary values: " + ", ".join(str(v) for v in inventory.values()))
 
     is_present(inventory, "sword")
+
+    print()
+    print("Why are dictionaries essential for game data?")
+    print("How do nested dictionaries model complex relationships?")
 
 
 if __name__ == "__main__":
