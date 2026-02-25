@@ -23,6 +23,15 @@ def count_inventory_items(inventory):
         i = i + 1
     return total
 
+def perc_inventory(inventory, tot_items):
+	keys = list(inventory.keys())
+	i = 0
+	while i < len(keys):
+		key = keys[i]
+		perc = (inventory[key] / tot_items) * 100
+		print(f"{key}: {inventory[key]} units ({perc}%)")
+		i = i + 1
+
 def main():
 	argc = len(sys.argv)
 	if argc == 1:
@@ -35,6 +44,8 @@ def main():
 	print("=== Inventory System Analysis ===")
 	print("Total items in inventory" )
 	print("Unique item types: ", len(inventory))
+	print("=== Current Inventory ===")
+	perc_inventory(inventory, total_items)
 	
 	
 
