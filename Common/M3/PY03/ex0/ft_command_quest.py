@@ -1,7 +1,6 @@
 import sys
 
 
-
 def main() -> None:
 	args = sys.argv
 	print("=== Command Quest ===")
@@ -12,8 +11,10 @@ def main() -> None:
 	else:
 		print(f"Program name: {args[0]}")
 		print(f"Arguments received: {len(args) - 1}")
-		for i, arg in enumerate(args[1:], 1):
-			print(f"Argument {i}: {arg}")
+		i = 1
+		while i < len(args):
+			print(f"Argument {i}: {args[i]}")
+			i += 1
 		print(f"Total arguments: {len(args)}")
 
 
