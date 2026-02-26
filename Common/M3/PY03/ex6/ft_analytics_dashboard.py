@@ -1,13 +1,21 @@
-class Score:
-	CAT_SCORE={
-		"high": 200,
-		"medium": 80,
-		"low": 20
-	}
+class Game():
+	def __init__(self, name: str, score: int, achivments: int):
+		self.name = name
+		self.score = score	
+		self.achivments = achivments
+		
+class User():
+	def __init__(self, name: str, region: str, days_not_log: int):
+		self.name = name
+		self.region = region
+		self.days_not_log = days_not_log
+		self.scores = {}
 
-class Player:
-	def __init__(self, name: str, day_not_active: int, kills: int, score: int, region: str):
-
+	def set_score(self, game: Game, score: int):
+		self.scores[game.name	] = score
+	
+	def get_score(self, game: Game):
+		return self.scores.get(game.name, 0)
 
 def main():
 	print("=== Game Analytics Dashboard ===\n")
