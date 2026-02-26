@@ -3,74 +3,103 @@ from typing import Generator
 
 
 class Game():
-	def __init__(self, name: str, score: int, achivments: int, category: str):
-		self.name = name
-		self.score = score	
-		self.achivments = achivments
-		self.category = category
-	
-	NAME_GAMES = ["CSGO", "Zelda", "DrugDeal", "SuperSmashBros", "LOL"]
-	CATEGORIES = ["Action", "Indie", "Horror", "Logic"]
+    NAMES = ["CSGO", "Zelda", "DrugDeal", "SuperSmashBros", "LOL"]
+    CATEGORIES = ["Action", "Indie", "Horror", "Logic"]
 
-
-def game_generator(n: int) -> Generator[Game, None, None]:
-	for _ in range(n):
-		name = random.choice(Game.NAME_GAMES)
-		score = random.randint(0, 5000)
-		achivments = random.randint(0,50)
-		category = random.choice(Game.CATEGORIES)
-
-		yield Game(name, score, achivments, category)
+    def __init__(self, name: str, category: str):
+        self.name = name
+        self.category = category
 
 
 class User():
-	def __init__(self, name: str, region: str, days_not_log: int):
-		self.name = name
-		self.region = region
-		self.days_not_log = days_not_log
-		self.scores = {}
+    NAMES = ["alice", "bob", "charlie", "diana", "ethan", "luna", "marco", "sofia", "leo", "nina"]
+    REGIONS = ["north", "east", "central", "south", "west"]
+    ACHIEVEMENTS = ["first_kill", "level_10", "boss_slayer", "speedrun", "no_damage", "collector"]
 
-	NAME = ["Alice","Bob","Charlie","Diana","Ethan","Luna","Marco","Sofia","Leo","Nina"]
+    def __init__(self, name: str, region: str, days_not_log: int):
+        self.name = name
+        self.region = region
+        self.days_not_log = days_not_log
+        self.score = 0
+        self.achievements = set()
 
-	REGION = ["EU-West","EU-East","NA-East","NA-West","Asia","South-America","Oceania","Middle-East"]
-
-
-	def set_score(self, game: Game, score: int):
-		self.scores[game.name] = score
-	
-	def get_score(self, game: Game):
-		return self.scores.get(game.name, 0)
+    def add_achievement(self, achievement: str):
+        self.achievements.add(achievement)
 
 
-def u_gen(n: int) -> Generator[User, None, None]:
-	for _ in range(n):
-		name = random.choice(User.NAME)
-		region = random.choice(User.REGION)
-		days_not_log = random.randint(0, 50)
+def game_generator(n: int) -> Generator[Game, None, None]:
+    for _ in range(n):
+        yield Game(random.choice(Game.NAMES), random.choice(Game.CATEGORIES))
 
-		yield User(name, region, days_not_log)
+
+def user_generator(n: int) -> Generator[User, None, None]:
+    names = random.sample(User.NAMES, min(n, len(User.NAMES)))
+    for i in range(n):
+        u = User(
+            name=names[i],
+            region=random.choice(User.REGIONS),
+            days_not_log=random.randint(0, 15)
+        )
+        u.score = random.randint(500, 3000)
+        for ach in random.sample(User.ACHIEVEMENTS, random.randint(1, len(User.ACHIEVEMENTS))):
+            u.add_achievement(ach)
+        yield u
 
 
 def main():
-	print("=== Game Analytics Dashboard ===\n")
+    print("=== Game Analytics Dashboard ===")
 
-	users = list(u_gen(30))
-	games = list(game_generator(80))
+    users = list(user_generator(6))
 
-	for user in users:
-		num_games = random.randint(5, 15)
-		chosen_games = random.sample(games, num_games)
+    print("=== List Comprehension Examples ===")
 
-		for game in chosen_games:
-			score = random.randint(0, 1000)
-			user.set_score(game, score)
+    high_scorers = [u.name for u in users if u.score > 2000]
+    print(f"High scorers (>2000): {high_scorers}")
 
-	for user in users[:5]:
-		print(user.name, "-", user.region)
-		for game_name, score in user.scores.items():
-			print("  ", game_name, ":", score)
-		print()
+    scores_doubled = [u.score * 2 for u in users if u.score > 2000]
+    print(f"Scores doubled: {scores_doubled}")
+
+    active_players = [u.name for u in users if u.days_not_log <= 5]
+    print(f"Active players: {active_players}")
+
+    print("=== Dict Comprehension Examples ===")
+
+    player_scores = {u.name: u.score for u in users if u.score > 1500}
+    print(f"Player scores: {player_scores}")
+
+    score_categories = {
+        "high":   len([u for u in users if u.score > 2000]),
+        "medium": len([u for u in users if 1500 <= u.score <= 2000]),
+        "low":    len([u for u in users if u.score < 1500]),
+    }
+    print(f"Score categories: {score_categories}")
+
+    achievement_counts = {u.name: len(u.achievements) for u in users if u.score > 1500}
+    print(f"Achievement counts: {achievement_counts}")
+
+    print("=== Set Comprehension Examples ===")
+
+    unique_players = {u.name for u in users}
+    print(f"Unique players: {unique_players}")
+
+    unique_achievements = {a for u in users for a in u.achievements}
+    print(f"Unique achievements: {unique_achievements}")
+
+    active_regions = {u.region for u in users if u.days_not_log <= 5}
+    print(f"Active regions: {active_regions}")
+
+    print("=== Combined Analysis ===")
+
+    total_players = len(users)
+    total_unique_achievements = len({a for u in users for a in u.achievements})
+    avg_score = sum(u.score for u in users) / total_players
+    top = max(users, key=lambda u: u.score)
+
+    print(f"Total players: {total_players}")
+    print(f"Total unique achievements: {total_unique_achievements}")
+    print(f"Average score: {avg_score}")
+    print(f"Top performer: {top.name} ({top.score} points, {len(top.achievements)} achievements)")
 
 
 if __name__ == "__main__":
-	main()
+    main()
