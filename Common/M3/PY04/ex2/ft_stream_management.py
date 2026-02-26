@@ -8,8 +8,7 @@ def main() -> None:
     status_report = input("Input Stream active. Enter status report: ")
 
     sys.stdout.write(
-        f"[STANDARD] Archive status from {archivist_id}:"
-        f" {status_report}\n"
+        f"[STANDARD] Archive status from {archivist_id}: {status_report}\n"
     )
     sys.stderr.write(
         "[ALERT] System diagnostic: Communication channels verified\n"
