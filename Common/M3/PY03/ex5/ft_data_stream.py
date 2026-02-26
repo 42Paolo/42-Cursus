@@ -171,10 +171,6 @@ def main() -> None:
     prime_values = [next(prime_gen) for _ in range(5)]
     print(f"Prime numbers (first 5): {', '.join(str(x) for x in prime_values)}\n")
 
-    print("How do generators enable memory-efficient processing?")
-    print("  -> They produce one value at a time via yield, avoiding full in-memory storage.\n")
-    print("What makes for-in loops perfect for streaming data?")
-    print("  -> They consume generators element by element, without loading the entire sequence.")
 
 
 if __name__ == "__main__":
