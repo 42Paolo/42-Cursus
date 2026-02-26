@@ -3,7 +3,11 @@ class Game():
 		self.name = name
 		self.score = score	
 		self.achivments = achivments
-		
+
+
+
+
+
 class User():
 	def __init__(self, name: str, region: str, days_not_log: int):
 		self.name = name
