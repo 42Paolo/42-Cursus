@@ -89,7 +89,7 @@ def main():
     print(f"Active regions: {active_regions}")
 
     print("=== Combined Analysis ===")
-
+a
     total_players = len(users)
     total_unique_achievements = len({a for u in users for a in u.achievements})
     avg_score = sum(u.score for u in users) / total_players
