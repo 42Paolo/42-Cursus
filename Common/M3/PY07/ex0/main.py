@@ -37,8 +37,12 @@ def main() -> None:
 
     print("Abstract pattern successfully demonstrated!")
     print(
-        "How do abstract base classes ensure consistency across different card types? "
-        "What happens if you try to create a Card directly without implementing required methods?"
+        "How do abstract base classes ensure consistency "
+        "across different card types?"
+    )
+    print(
+        "What happens if you try to create a Card directly "
+        "without implementing required methods?"
     )
 
 
