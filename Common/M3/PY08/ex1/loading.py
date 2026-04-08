@@ -43,17 +43,13 @@ else:
 
 if "pd" in sys.modules and "np" in sys.modules and "mpl" in sys.modules:
     print("\nAnalyzing Matrix data...")
-    
     data = np.random.rand(1000, 2)
     print("Processing 1000 data points...")
-    
     df = pd.DataFrame(data, columns=['Vector A', 'Vector B'])
-    
     print("Generating visualization...")
     df.plot()
     plt.title("Matrix Analysis Output")
     plt.savefig('matrix_analysis.png')
-    
     print("\nAnalysis complete!")
     print("Results saved to: matrix_analysis.png")
 else:
@@ -62,5 +58,5 @@ else:
     sys.exit(1)
 
 print("\n--- PIP vs POETRY ---")
-print("PIP: usa requirements.txt, installazione flat, meno controllo versioni.")
-print("POETRY: usa pyproject.toml, gestione isolata e lock file deterministico.")
+print("PIP: usa requirements.txt, installazione flat.")
+print("POETRY: usa pyproject.toml, isolamento e lock file.")
