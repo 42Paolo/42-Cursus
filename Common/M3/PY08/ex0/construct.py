@@ -31,7 +31,6 @@ def check_matrix():
         print("Virtual Environment: None detected")
         print()
         print("WARNING: You're in the global environment!")
-        # Gestione stringa lunga per evitare errori E501
         instructions = (
             "The machines can see everything you install.\n"
             "To enter the construct, run:\n"
