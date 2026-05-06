@@ -69,5 +69,5 @@ else:
 
 print()
 print("--- PIP vs POETRY ---")
-print("PIP: uses requirements.txt, flat installation.")
-print("POETRY: uses pyproject.toml, isolation and lock file.")
+print("PIP: semplice e veloce ma non gestisce la venv e le dipendenze indirette")
+print("POETRY: piu difficile, ma gestisce virtualvenv, dipendenze e versioni in modo intelligente, evita conflitti")
