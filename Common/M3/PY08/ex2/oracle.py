@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Configurazione costanti da variabili d'ambiente
 MATRIX_MODE = os.getenv("MATRIX_MODE", "development")
 DATABASE_URL = os.getenv("DATABASE_URL")
 API_KEY = os.getenv("API_KEY")
@@ -12,7 +11,6 @@ LOG_LEVEL = os.getenv("LOG_LEVEL", "DEBUG")
 ZION_ENDPOINT = os.getenv("ZION_ENDPOINT")
 
 print("ORACLE STATUS: Reading the Matrix...")
-print()
 
 missing = []
 if not DATABASE_URL:
@@ -23,11 +21,12 @@ if not ZION_ENDPOINT:
     missing.append("ZION_ENDPOINT")
 
 if missing:
+    print()
     print("[WARN] Missing configuration variables:")
     for var in missing:
         print(f"  - {var} not set, using fallback")
-    print()
 
+print()
 print("Configuration loaded:")
 
 if MATRIX_MODE == "production":
@@ -41,10 +40,10 @@ else:
     zion_display = ("Online" if ZION_ENDPOINT
                     else "Offline - endpoint missing")
 
-print(f"  Mode:         {MATRIX_MODE}")
-print(f"  Database:     {db_display}")
-print(f"  API Access:   {api_display}")
-print(f"  Log Level:    {LOG_LEVEL}")
+print(f"  Mode: {MATRIX_MODE}")
+print(f"  Database: {db_display}")
+print(f"  API Access: {api_display}")
+print(f"  Log Level: {LOG_LEVEL}")
 print(f"  Zion Network: {zion_display}")
 print()
 
