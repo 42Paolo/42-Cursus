@@ -4,12 +4,14 @@ from typing import List
 
 from pydantic import BaseModel, Field, ValidationError, model_validator
 
+
 class Rank(str, Enum):
     CADET = "cadet"
     OFFICER = "officer"
     LIEUTENANT = "lieutenant"
     CAPTAIN = "captain"
     COMMANDER = "commander"
+
 
 class CrewMember(BaseModel):
     member_id: str = Field(..., min_length=3, max_length=10)
